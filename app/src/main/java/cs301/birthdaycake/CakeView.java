@@ -56,7 +56,7 @@ public class CakeView extends SurfaceView {
         cakePaint.setStyle(Paint.Style.FILL);
         frostingPaint.setColor(0xFFFFFACD);  //pale yellow
         frostingPaint.setStyle(Paint.Style.FILL);
-        candlePaint.setColor(0xFF32CD32);  //lime green
+        candlePaint.setColor(0xFF4287f5);  // blue
         candlePaint.setStyle(Paint.Style.FILL);
         outerFlamePaint.setColor(0xFFFFD700);  //gold yellow
         outerFlamePaint.setStyle(Paint.Style.FILL);
