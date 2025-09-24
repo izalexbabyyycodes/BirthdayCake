@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         CakeController myCakeController = new CakeController(myCakeView);
         Button blowout = findViewById(R.id.button5);
         blowout.setOnClickListener(myCakeController);
+        CompoundButton candles = findViewById(R.id.switch2);
+        candles.setOnCheckedChangeListener(myCakeController);
     }
 
     public void goodbye (View Button){
