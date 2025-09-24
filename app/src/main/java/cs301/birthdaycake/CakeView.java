@@ -126,8 +126,9 @@ public class CakeView extends SurfaceView {
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
         //Now a candle in the center
-        drawCandle(canvas, cakeLeft - 125 + cakeWidth / 2 - candleWidth / 2, cakeTop);
-        drawCandle(canvas, cakeLeft + 125 + cakeWidth / 2 - candleWidth / 2, cakeTop);
+        for (int i = 0; i < cakeModel.getNumCandles(); i++) {
+            drawCandle(canvas, (cakeLeft - 250) + (i * 125) + cakeWidth / 2 - candleWidth / 2, cakeTop);
+        }
         invalidate();
 
     }//onDraw
@@ -146,4 +147,8 @@ public class CakeView extends SurfaceView {
         float wickLeft = left + candleWidth/2 - wickWidth/2;
         float wickTop = bottom - wickHeight - candleHeight;
         canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
+
+//drawCandle(canvas, cakeLeft + 125 + cakeWidth / 2 - candleWidth / 2, cakeTop);
+
+
  */

@@ -10,7 +10,9 @@ public class CakeModel {
 
     public void setHasFire(boolean b){hasFire = b;}
     public void setHasCandles(boolean b){hasCandles = b;}
+    public void setNumCandles(int i ){numCandles = i;}
 
     public boolean getHasFire(){return hasFire;}
     public boolean getHasCandles(){return hasCandles;}
+    public int getNumCandles(){return numCandles;}
 }
