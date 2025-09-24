@@ -8,4 +8,6 @@ public class CakeModel {
     public boolean hasFrosting = true;
     public boolean hasCandles = true;
 
+    public void setHasFire(boolean b){hasFire = b;}
+    public boolean getHasFire(){return hasFire;}
 }
