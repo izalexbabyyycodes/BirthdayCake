@@ -28,13 +28,23 @@ public class CakeController implements View.OnClickListener,
     public boolean onTouch(View v, MotionEvent event){
         float x = event.getX();
         float y= event.getY();
-
+        cakeModel.checkerCx = event.getX();
+        cakeModel.checkerCy = event.getY();
+        cakeModel.showChecker = true;
         cakeModel.setTouch(x,y);
         cakeModel.setShowCoords(true);
         cakeView.invalidate();
         return true;
     }
-
+//    @Override
+//    public boolean onTouch(View view, MotionEvent motionEvent ) {
+//        float a = motionEvent.getActionMasked();
+//        if (a == MotionEvent.ACTION_DOWN || a == MotionEvent.ACTION_MOVE) {
+//            cakeView.invalidate();
+//            return true;
+//        }
+//        return false;
+//    }
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if(b){Log.d("switch", "candles");}
@@ -56,16 +66,5 @@ public class CakeController implements View.OnClickListener,
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent ) {
-            int a = motionEvent.getActionMasked();
-            if (a == MotionEvent.ACTION_DOWN || a == MotionEvent.ACTION_MOVE) {
-                cakeModel.checkerCx = motionEvent.getX();
-                cakeModel.checkerCy = motionEvent.getY();
-                cakeModel.showChecker = true;
-                cakeView.invalidate();
-                return true;
-            }
-        return false;
-    }
+
 }
