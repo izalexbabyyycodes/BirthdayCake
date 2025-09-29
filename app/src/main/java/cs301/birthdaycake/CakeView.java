@@ -4,10 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class CakeView extends SurfaceView {
+    private Paint coordPaint = new Paint();
 
     ///these are the instances made by myself
     private CakeModel cakeModel;
@@ -67,6 +70,11 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+
+        coordPaint.setColor(Color.RED);
+        coordPaint.setTextSize(64f);
+        coordPaint.setAntiAlias(true);
+        coordPaint.setTextAlign(Paint.Align.RIGHT);
 
         redSquare.setColor(Color.RED);
         greenSquare.setColor(Color.GREEN);
@@ -137,6 +145,15 @@ public class CakeView extends SurfaceView {
 
     }
 
+    public void drawBalloon(Canvas canvas){
+        float x = cakeModel.getTouchX();
+        float y = cakeModel.getTouchY();
+        RectF balloon = new RectF(x-100, y-150, x + 100, y + 150);
+        canvas.drawOval(balloon, candlePaint);
+        canvas.drawRect(x, y+150, x +5, y + 350, wickPaint);
+        invalidate();
+    }
+
     /**
      * onDraw is like "paint" in a regular Java program.  While a Canvas is
      * conceptually similar to a Graphics in javax.swing, the implementation has
@@ -172,6 +189,19 @@ public class CakeView extends SurfaceView {
         //Now a candle in the center
         for (int i = 0; i < cakeModel.getNumCandles(); i++) {
             drawCandle(canvas, (cakeLeft - 250) + (i * 125) + cakeWidth / 2 - candleWidth / 2, cakeTop);
+        }
+        drawBalloon(canvas);
+
+        if(cakeModel.getShowCoords()){
+            float textX = getWidth()-50f;
+            float textY = getHeight() - 50f;
+            String msg = "X: "+ (int) cakeModel.getTouchX() + ", y:" + (int) cakeModel.getTouchY();
+
+            float x = getWidth() /2f;
+            Paint.FontMetrics fm = coordPaint.getFontMetrics();
+            float y = getHeight() - 60f - fm.bottom;
+            canvas.drawText(msg, textX, textY, coordPaint);
+
         }
 
         //Checker Board

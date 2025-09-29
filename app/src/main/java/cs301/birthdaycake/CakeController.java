@@ -22,6 +22,17 @@ public class CakeController implements View.OnClickListener,
     public void onClick (View view){
         Log.d("cake", "click!");
         cakeModel.setHasFire(false);
+        cakeView.invalidate();
+    }
+
+    public boolean onTouch(View v, MotionEvent event){
+        float x = event.getX();
+        float y= event.getY();
+
+        cakeModel.setTouch(x,y);
+        cakeModel.setShowCoords(true);
+        cakeView.invalidate();
+        return true;
     }
 
     @Override
