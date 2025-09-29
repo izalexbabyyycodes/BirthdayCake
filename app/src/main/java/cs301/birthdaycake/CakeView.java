@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class CakeView extends SurfaceView {
-    private Paint coordPaint;
+    private Paint coordPaint = new Paint();
 
     ///these are the instances made by myself
     private CakeModel cakeModel;
@@ -27,7 +27,7 @@ public class CakeView extends SurfaceView {
         and adapting to different tablets' screen sizes and resolutions.  I've deliberately
         stuck with hard-coded values here to ease the introduction for CS371 students.
      */
-    private final Paint cordPaint = new Paint();
+    //private final Paint cordPaint = new Paint();
 
     public static final float cakeTop = 400.0f;
     public static final float cakeLeft = 100.0f;
@@ -71,6 +71,7 @@ public class CakeView extends SurfaceView {
         coordPaint.setColor(Color.RED);
         coordPaint.setTextSize(64f);
         coordPaint.setAntiAlias(true);
+        coordPaint.setTextAlign(Paint.Align.RIGHT);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -141,8 +142,14 @@ public class CakeView extends SurfaceView {
             float textX = getWidth()-50f;
             float textY = getHeight() - 50f;
             String msg = "X: "+ (int) cakeModel.getTouchX() + ", y:" + (int) cakeModel.getTouchY();
+
+            float x = getWidth() /2f;
+            Paint.FontMetrics fm = coordPaint.getFontMetrics();
+            float y = getHeight() - 60f - fm.bottom;
             canvas.drawText(msg, textX, textY, coordPaint);
+
         }
+
 
     }//onDraw
 
