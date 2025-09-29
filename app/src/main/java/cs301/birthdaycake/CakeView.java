@@ -21,6 +21,9 @@ public class CakeView extends SurfaceView {
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
 
+    Paint redSquare = new Paint();
+    Paint greenSquare = new Paint();
+
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
         and adapting to different tablets' screen sizes and resolutions.  I've deliberately
@@ -65,6 +68,9 @@ public class CakeView extends SurfaceView {
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
 
+        redSquare.setColor(Color.RED);
+        greenSquare.setColor(Color.GREEN);
+
         setBackgroundColor(Color.WHITE);  //better than black default
 
     }
@@ -91,6 +97,44 @@ public class CakeView extends SurfaceView {
                 canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
             }
         }
+    }
+
+
+    /**
+     * Person C: Modify the birthday cake app so that when the user touches the drawing,
+     * a green and red checkerboard pattern (as shown below) is drawn in that location.
+     * Each subsequent touch causes the pattern to move to a new location.
+     */
+
+    public void drawCheckBoard(Canvas canvas){
+        int rows = cakeModel.checkerRows;
+        int cols = cakeModel.checkerCols;
+        float pixel = cakeModel.checkerPixel;
+
+        float totalW = cols * pixel;
+        float totalH = rows * pixel;
+
+        // Centers on spot that is "touched"
+        float left0 = cakeModel.checkerCx - totalW / 2f;
+        float top0  = cakeModel.checkerCy - totalH / 2f;
+
+        for (int r = 0; r < rows; r++) {
+            for (int col = 0; col < cols; col++) {
+                float left = left0 + col * pixel;
+                float top  = top0 + r * pixel;
+                float right = left + pixel;
+                float bottom = top + pixel;
+
+                // Decides what color to choose
+                // r = row index
+                // r + col = even/odd if 0 then even
+                // "?" if statement... "?"/if 0/even then green
+                Paint p = (((r + col) & 1) == 0) ? greenSquare : redSquare;
+
+                canvas.drawRect(left, top, right, bottom, p);
+            }
+        }
+
     }
 
     /**
@@ -129,6 +173,12 @@ public class CakeView extends SurfaceView {
         for (int i = 0; i < cakeModel.getNumCandles(); i++) {
             drawCandle(canvas, (cakeLeft - 250) + (i * 125) + cakeWidth / 2 - candleWidth / 2, cakeTop);
         }
+
+        //Checker Board
+        if (cakeModel.showChecker) {
+            drawCheckBoard(canvas);
+        }
+
         invalidate();
 
     }//onDraw

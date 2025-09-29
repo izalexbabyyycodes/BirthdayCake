@@ -15,4 +15,11 @@ public class CakeModel {
     public boolean getHasFire(){return hasFire;}
     public boolean getHasCandles(){return hasCandles;}
     public int getNumCandles(){return numCandles;}
+
+    public boolean showChecker = false;
+    public float checkerCx = 0f;   // center x
+    public float checkerCy = 0f;   // center y
+    public int checkerRows = 2;
+    public int checkerCols = 2;
+    public float checkerPixel = 40f; // px per square
 }
