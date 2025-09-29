@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
+import android.view.View;
 
-public class CakeView extends SurfaceView {
+public class CakeView extends SurfaceView{
 
     ///these are the instances made by myself
     private CakeModel cakeModel;
@@ -93,6 +95,15 @@ public class CakeView extends SurfaceView {
         }
     }
 
+    public void drawBalloon(Canvas canvas){
+        float x = cakeModel.getPressedX();
+        float y = cakeModel.getPressedY();
+        RectF balloon = new RectF(x-100, y-150, x + 100, y + 150);
+        canvas.drawOval(balloon, candlePaint);
+        canvas.drawRect(x, y+150, x +5, y + 350, wickPaint);
+        invalidate();
+    }
+
     /**
      * onDraw is like "paint" in a regular Java program.  While a Canvas is
      * conceptually similar to a Graphics in javax.swing, the implementation has
@@ -129,7 +140,7 @@ public class CakeView extends SurfaceView {
         for (int i = 0; i < cakeModel.getNumCandles(); i++) {
             drawCandle(canvas, (cakeLeft - 250) + (i * 125) + cakeWidth / 2 - candleWidth / 2, cakeTop);
         }
-        invalidate();
+        drawBalloon(canvas);
 
     }//onDraw
 
