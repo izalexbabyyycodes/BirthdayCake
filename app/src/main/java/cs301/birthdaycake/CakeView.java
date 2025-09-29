@@ -102,8 +102,8 @@ public class CakeView extends SurfaceView {
     }
 
     public void drawBalloon(Canvas canvas){
-        float x = cakeModel.getPressedX();
-        float y = cakeModel.getPressedY();
+        float x = cakeModel.getTouchX();
+        float y = cakeModel.getTouchY();
         RectF balloon = new RectF(x-100, y-150, x + 100, y + 150);
         canvas.drawOval(balloon, candlePaint);
         canvas.drawRect(x, y+150, x +5, y + 350, wickPaint);

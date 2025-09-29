@@ -28,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
         numCandles.setOnSeekBarChangeListener(myCakeController);
         CakeView balloon = findViewById(R.id.cakeview);
         balloon.setOnTouchListener(myCakeController);
-
-        myCakeView.setOnClickListener(myCakeController);
-        myCakeView.setOnTouchListener(myCakeController);
     }
 
     public void goodbye (View Button){
