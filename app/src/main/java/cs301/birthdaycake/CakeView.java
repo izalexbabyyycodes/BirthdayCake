@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class CakeView extends SurfaceView {
+    private Paint coordPaint;
 
     ///these are the instances made by myself
     private CakeModel cakeModel;
@@ -26,6 +27,8 @@ public class CakeView extends SurfaceView {
         and adapting to different tablets' screen sizes and resolutions.  I've deliberately
         stuck with hard-coded values here to ease the introduction for CS371 students.
      */
+    private final Paint cordPaint = new Paint();
+
     public static final float cakeTop = 400.0f;
     public static final float cakeLeft = 100.0f;
     public static final float cakeWidth = 1200.0f;
@@ -64,6 +67,10 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+
+        coordPaint.setColor(Color.RED);
+        coordPaint.setTextSize(64f);
+        coordPaint.setAntiAlias(true);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -129,7 +136,13 @@ public class CakeView extends SurfaceView {
         for (int i = 0; i < cakeModel.getNumCandles(); i++) {
             drawCandle(canvas, (cakeLeft - 250) + (i * 125) + cakeWidth / 2 - candleWidth / 2, cakeTop);
         }
-        invalidate();
+
+        if(cakeModel.getShowCoords()){
+            float textX = getWidth()-50f;
+            float textY = getHeight() - 50f;
+            String msg = "X: "+ (int) cakeModel.getTouchX() + ", y:" + (int) cakeModel.getTouchY();
+            canvas.drawText(msg, textX, textY, coordPaint);
+        }
 
     }//onDraw
 
@@ -137,7 +150,25 @@ public class CakeView extends SurfaceView {
         return this.cakeModel;
     }
 
-}//class CakeView
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+//class CakeView
 
 
 
@@ -152,3 +183,4 @@ public class CakeView extends SurfaceView {
 
 
  */
+
