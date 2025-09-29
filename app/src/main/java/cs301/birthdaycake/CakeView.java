@@ -9,7 +9,8 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.View;
 
-public class CakeView extends SurfaceView{
+public class CakeView extends SurfaceView {
+    private Paint coordPaint = new Paint();
 
     ///these are the instances made by myself
     private CakeModel cakeModel;
@@ -66,6 +67,11 @@ public class CakeView extends SurfaceView{
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+
+        coordPaint.setColor(Color.RED);
+        coordPaint.setTextSize(64f);
+        coordPaint.setAntiAlias(true);
+        coordPaint.setTextAlign(Paint.Align.RIGHT);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -141,6 +147,19 @@ public class CakeView extends SurfaceView{
             drawCandle(canvas, (cakeLeft - 250) + (i * 125) + cakeWidth / 2 - candleWidth / 2, cakeTop);
         }
         drawBalloon(canvas);
+
+        if(cakeModel.getShowCoords()){
+            float textX = getWidth()-50f;
+            float textY = getHeight() - 50f;
+            String msg = "X: "+ (int) cakeModel.getTouchX() + ", y:" + (int) cakeModel.getTouchY();
+
+            float x = getWidth() /2f;
+            Paint.FontMetrics fm = coordPaint.getFontMetrics();
+            float y = getHeight() - 60f - fm.bottom;
+            canvas.drawText(msg, textX, textY, coordPaint);
+
+        }
+        invalidate();
 
     }//onDraw
 

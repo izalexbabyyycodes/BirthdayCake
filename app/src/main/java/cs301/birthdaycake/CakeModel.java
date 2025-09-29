@@ -10,15 +10,29 @@ public class CakeModel {
     public float pressedX = 100;
     public float pressedY = 100;
 
+    private boolean showCoords = false;
+    private float touchX = 0f;
+    private float touchY = 0f;
+
+
     public void setHasFire(boolean b){hasFire = b;}
     public void setHasCandles(boolean b){hasCandles = b;}
-    public void setNumCandles(int i){numCandles = i;}
-    public void setPressedX(float i){pressedX = i;}
-    public void setPressedY(float i){pressedY = i;}
+    public void setNumCandles(int i ){numCandles = i;}
+
+    // Getter / setters
+    public boolean getShowCoords() {return showCoords;}
+    public void setShowCoords(Boolean show) {
+        this.showCoords = show;
+    }
+
+    public float getTouchX(){ return touchX;}
+    public float getTouchY(){ return touchY;}
+    public void setTouch(float x, float y){
+        this.touchX= x;
+        this.touchY = y;
+    }
 
     public boolean getHasFire(){return hasFire;}
     public boolean getHasCandles(){return hasCandles;}
     public int getNumCandles(){return numCandles;}
-    public float getPressedX(){return pressedX;}
-    public float getPressedY(){return pressedY;}
 }
